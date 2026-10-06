@@ -12,9 +12,14 @@ import os
 import random
 import time
 from datetime import datetime, timezone
+from pathlib import Path
 
 os.environ.setdefault("SS_LOG_LEVEL", "warn")
 from snowflake.ingest.streaming import StreamingIngestClient  # noqa: E402
+
+# profile.json y la llave se leen siempre de la carpeta del script, no de donde se lance
+AQUI = Path(__file__).resolve().parent
+os.chdir(AQUI)
 
 DB, SCHEMA, TABLE = "STREAMING_LAB", "PAGOS", "PAGOS_STREAM"
 PIPE = f"{TABLE}-STREAMING"  # pipe por defecto: Snowflake lo crea al abrir el primer canal
@@ -51,7 +56,7 @@ def main() -> None:
         db_name=DB,
         schema_name=SCHEMA,
         pipe_name=PIPE,
-        profile_json="profile.json",
+        profile_json=str(AQUI / "profile.json"),
     ) as client:
         channel, status = client.open_channel(args.canal)
         with channel:
