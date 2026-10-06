@@ -1,0 +1,6 @@
+.venv/
+rsa_key.p8
+rsa_key.pub
+profile.json
+__pycache__/
+*.p8

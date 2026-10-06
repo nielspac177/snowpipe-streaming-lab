@@ -1,0 +1,7 @@
+{
+  "account": "ORG-CUENTA",
+  "user": "TU_USUARIO",
+  "url": "https://ORG-CUENTA.snowflakecomputing.com:443",
+  "private_key_file": "rsa_key.p8",
+  "role": "ACCOUNTADMIN"
+}
