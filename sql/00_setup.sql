@@ -28,7 +28,8 @@ CREATE OR REPLACE TABLE PAGOS_STREAM (
 --   openssl genrsa 2048 | openssl pkcs8 -topk8 -inform PEM -out rsa_key.p8 -nocrypt
 --   openssl rsa -in rsa_key.p8 -pubout -out rsa_key.pub
 -- Pega el contenido de rsa_key.pub SIN las líneas BEGIN/END ni saltos de línea:
-ALTER USER IDENTIFIER(CURRENT_USER()) SET RSA_PUBLIC_KEY = 'MIIBIjANBgkq...';
+SET MI_USUARIO = CURRENT_USER();   -- guarda tu usuario en una variable
+ALTER USER IDENTIFIER($MI_USUARIO) SET RSA_PUBLIC_KEY = 'MIIBIjANBgkq...';
 
 -- Datos para profile.json:
 SELECT CURRENT_USER() AS user,

@@ -72,7 +72,7 @@ El script deja `rsa_key.p8` (tu llave privada) en la carpeta e imprime la llave 
 
 **3. Prepara Snowflake**
 
-En Snowsight abre un worksheet de SQL nuevo y pega [`sql/00_setup.sql`](sql/00_setup.sql). Cambia `'MIIBIjANBgkq...'` por tu llave pública y ejecuta todo con Cmd/Ctrl + Shift + Enter. Si la línea `ALTER USER IDENTIFIER(CURRENT_USER())` da error, pon tu usuario a mano: `ALTER USER MI_USUARIO SET RSA_PUBLIC_KEY = '...'`.
+En Snowsight abre un worksheet de SQL nuevo y pega [`sql/00_setup.sql`](sql/00_setup.sql). Cambia `'MIIBIjANBgkq...'` por tu llave pública y ejecuta todo con Cmd/Ctrl + Shift + Enter. Si la línea `ALTER USER IDENTIFIER($MI_USUARIO)` da error, pon tu usuario a mano: `ALTER USER MI_USUARIO SET RSA_PUBLIC_KEY = '...'`.
 
 La última consulta te devuelve tres valores, `USER`, `ACCOUNT` y `URL`. Los necesitas en el siguiente paso.
 
