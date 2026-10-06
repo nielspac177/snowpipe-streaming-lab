@@ -22,7 +22,6 @@ AQUI = Path(__file__).resolve().parent
 os.chdir(AQUI)
 
 DB, SCHEMA, TABLE = "STREAMING_LAB", "PAGOS", "PAGOS_STREAM"
-PIPE = f"{TABLE}-STREAMING"  # pipe por defecto: Snowflake lo crea al abrir el primer canal
 
 SUCURSALES = ["MTY-CENTRO", "MTY-APODACA", "SALTILLO", "CHIHUAHUA", "LIMA", "GUAYAQUIL"]
 CANALES = ["TRADICIONAL", "MODERNO", "B2B-APP"]
@@ -49,6 +48,7 @@ def main() -> None:
     ap.add_argument("--canal", default="CANAL_PAGOS_01")
     ap.add_argument("--db", default=DB, help="base de datos (por defecto STREAMING_LAB)")
     ap.add_argument("--schema", default=SCHEMA, help="schema (por defecto PAGOS)")
+    ap.add_argument("--tabla", default=TABLE, help="tabla destino (por defecto PAGOS_STREAM)")
     ap.add_argument("--fila-mala-en", type=int, default=0,
                     help="Reto 2: en este pago_id manda MONTO no numérico")
     args = ap.parse_args()
@@ -57,7 +57,7 @@ def main() -> None:
         client_name="productor-pagos",
         db_name=args.db,
         schema_name=args.schema,
-        pipe_name=PIPE,
+        pipe_name=f"{args.tabla}-STREAMING",  # pipe por defecto: Snowflake lo crea al abrir el primer canal
         profile_json=str(AQUI / "profile.json"),
     ) as client:
         channel, status = client.open_channel(args.canal)
