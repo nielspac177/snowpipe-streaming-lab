@@ -82,7 +82,7 @@ La última consulta te devuelve tres valores, `USER`, `ACCOUNT` y `URL`. Los nec
 cp profile.json.example profile.json
 ```
 
-Abre `profile.json` y pon tus tres valores en `user`, `account` y `url`.
+Abre `profile.json` y pon tus tres valores en `user`, `account` y `url`. El rol es `ACCOUNTADMIN` porque trabajas en una cuenta de práctica; en un proyecto real el productor debe usar un rol con permisos solo sobre su tabla.
 
 **5. Prueba de humo**
 

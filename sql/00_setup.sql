@@ -1,6 +1,8 @@
 -- =====================================================================
 -- Snowpipe Streaming Lab · 00_setup.sql
 -- Cada alumno en su propia cuenta (trial sirve). Correr como ACCOUNTADMIN.
+-- ACCOUNTADMIN solo porque es una cuenta de práctica desechable. En producción
+-- el productor usa un rol propio con privilegios mínimos sobre la tabla y el pipe.
 -- =====================================================================
 USE ROLE ACCOUNTADMIN;
 
