@@ -47,14 +47,16 @@ def main() -> None:
     ap.add_argument("--minutos", type=float, default=15)
     ap.add_argument("--p-fraude", type=float, default=0.003)
     ap.add_argument("--canal", default="CANAL_PAGOS_01")
+    ap.add_argument("--db", default=DB, help="base de datos (por defecto STREAMING_LAB)")
+    ap.add_argument("--schema", default=SCHEMA, help="schema (por defecto PAGOS)")
     ap.add_argument("--fila-mala-en", type=int, default=0,
                     help="Reto 2: en este pago_id manda MONTO no numérico")
     args = ap.parse_args()
 
     with StreamingIngestClient(
         client_name="productor-pagos",
-        db_name=DB,
-        schema_name=SCHEMA,
+        db_name=args.db,
+        schema_name=args.schema,
         pipe_name=PIPE,
         profile_json=str(AQUI / "profile.json"),
     ) as client:
